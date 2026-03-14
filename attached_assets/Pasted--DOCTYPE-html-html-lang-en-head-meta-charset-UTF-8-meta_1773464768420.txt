@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMR International</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+
+<body>
+
+<!-- TOP CONTACT BAR -->
+
+<div class="topbar">
+
+<div class="container">
+
+<div class="left">
+📍 07 District Centre, CS Pur, Bhubaneswar
+</div>
+
+<div class="right">
+📞 +91-9938080165
+✉ imrinternational11@gmail.com
+</div>
+
+</div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="container header">
+
+<div class="logo">
+
+<img src="assets/logo.png">
+<div>
+<h2>INTERNATIONAL INSTITUTE FOR MANAGEMENT AND RESEARCH</h2>
+<p>SMART – DIGITAL – INNOVATION</p>
+</div>
+
+</div>
+
+
+<nav>
+
+<ul class="menu">
+
+<!-- ABOUT -->
+
+<li class="dropdown">
+
+<a href="#">About Us ▾</a>
+
+<ul class="dropdown-menu">
+
+<li class="submenu">
+<a href="#">About IMR INTERNATIONAL ▶</a>
+
+<ul class="submenu-menu">
+
+<li><a href="#">IMR INTERNATIONAL</a></li>
+<li><a href="#">Objectives</a></li>
+<li><a href="#">Mission & Vision</a></li>
+<li><a href="#">Recognition</a></li>
+<li><a href="#">Principal Message</a></li>
+
+</ul>
+
+</li>
+
+<li><a href="#">Executive Board Member</a></li>
+<li><a href="#">Advisory Board Member</a></li>
+<li><a href="#">Governing Body</a></li>
+<li><a href="#">President Message</a></li>
+<li><a href="#">Chairman Message</a></li>
+
+</ul>
+
+</li>
+
+
+<!-- EDUCATION -->
+
+<li class="dropdown">
+
+<a href="#">Education ▾</a>
+
+<ul class="dropdown-menu">
+
+<li class="submenu">
+
+<a href="#">Professional Education ▶</a>
+
+<ul class="submenu-menu">
+
+<li>BBA</li>
+<li>BCA</li>
+<li>BSc Data Science</li>
+
+</ul>
+
+</li>
+
+<li class="submenu">
+
+<a href="#">Corporate Education ▶</a>
+
+<ul class="submenu-menu">
+
+<li>Skill-Based Program</li>
+<li>Leadership Program</li>
+<li>Campus to Corporate Program</li>
+
+</ul>
+
+</li>
+
+<li class="submenu">
+
+<a href="#">SMART Education ▶</a>
+
+<ul class="submenu-menu">
+
+<li>Adaptive Learning Program</li>
+<li>SMART Employability Program</li>
+<li>Collaborative Sprint Program</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+
+<!-- CERTIFICATION -->
+
+<li class="dropdown">
+
+<a href="#">Certification ▾</a>
+
+<ul class="dropdown-menu">
+
+<li class="submenu">
+
+<a href="#">Technology Certificate ▶</a>
+
+<ul class="submenu-menu">
+
+<li>AI & Machine Learning</li>
+<li>Data Science with Python-R</li>
+<li>Business Data Analytics</li>
+<li>Ethical Hacking</li>
+<li>Blockchain Technology</li>
+
+</ul>
+
+</li>
+
+<li class="submenu">
+
+<a href="#">Management Certificate ▶</a>
+
+<ul class="submenu-menu">
+
+<li>Digital Marketing</li>
+<li>Financial Technology</li>
+<li>Project Management</li>
+<li>HR Analytics</li>
+<li>Supply Chain Analytics</li>
+
+</ul>
+
+</li>
+
+<li class="submenu">
+
+<a href="#">Project and Internship ▶</a>
+
+<ul class="submenu-menu">
+
+<li>Live Project</li>
+<li>Summer Internship Project</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+
+<!-- FOCUS CENTERS -->
+
+<li class="dropdown">
+
+<a href="#">Focus Centers ▾</a>
+
+<ul class="dropdown-menu">
+
+<li>Centre for Research</li>
+<li>Centre for Training & Placement</li>
+<li>Centre for Student Development</li>
+<li>Centre for Women Empowerment</li>
+
+<li class="submenu">
+
+<a href="#">Centre for Consulting ▶</a>
+
+<ul class="submenu-menu">
+
+<li>NBA</li>
+<li>NAAC</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+</li>
+
+
+<!-- INSIGHTS -->
+
+<li class="dropdown">
+
+<a href="#">Insights ▾</a>
+
+<ul class="dropdown-menu">
+
+<li>Faculty Council</li>
+<li>30 Student Club</li>
+<li>20-20 Boot Camp</li>
+
+</ul>
+
+</li>
+
+
+<!-- ADMISSION -->
+
+<li class="dropdown">
+
+<a href="#">Admission ▾</a>
+
+<ul class="dropdown-menu">
+
+<li>Admission Process</li>
+<li>Scholarship</li>
+<li>Educational Loan</li>
+<li>Admission Enquiry</li>
+<li>Registration</li>
+
+</ul>
+
+</li>
+
+<li class="apply-btn">Apply Now</li>
+
+</ul>
+
+</nav>
+
+</div>
+
+</header>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>IMR INTERNATIONAL</h1>
+
+<p>Increase your skills in no time and enhance your career.</p>
+
+</section>
+
+
+
+<!-- MAIN CONTENT -->
+
+<section class="main container">
+
+<div class="content">
+
+<h2>IMR INTERNATIONAL</h2>
+
+<p>
+
+IMR INTERNATIONAL is an Educational Technology Organization in Bhubaneswar,
+Odisha providing SMART DIGITAL INNOVATION programs and skill development.
+
+</p>
+
+<button class="video-btn">
+IMR INTERNATIONAL VIDEO
+</button>
+
+</div>
+
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h3>DIGITAL CERTIFICATION PROGRAM</h3>
+
+<ul>
+
+<li>AI & Machine Learning</li>
+<li>Data Science with Python</li>
+<li>Business Data Analytics</li>
+<li>Ethical Hacking</li>
+<li>Blockchain Technology</li>
+<li>Digital Marketing</li>
+<li>Project Management</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer container">
+
+<div>
+
+<h3>IMR CONTACT INFO</h3>
+
+<p>Bhubaneswar, India</p>
+
+<p>+91 9938080165</p>
+
+</div>
+
+
+<div>
+
+<h3>IMR INTERNATIONAL</h3>
+
+<p>Mission & Vision</p>
+<p>Executive Board Member</p>
+<p>Advisory Board Member</p>
+
+</div>
+
+
+<div>
+
+<h3>IMR SMART EDUCATION</h3>
+
+<p>Bachelor of Business Administration</p>
+<p>Bachelor of Computer Application</p>
+<p>Bachelor of Science in Data Science</p>
+
+</div>
+
+
+<div>
+
+<h3>IMR DIGITAL CERTIFICATION</h3>
+
+<p>AI & Machine Learning</p>
+<p>Data Science</p>
+<p>Blockchain Technology</p>
+
+</div>
+
+</div>
+
+</footer>
+
+
+
+<!-- NEWS TICKER -->
+
+<div class="ticker">
+
+<marquee>
+
+Admission open for Academic Session 2026-27
+
+</marquee>
+
+</div>
+
+
+
+<!-- WHATSAPP BUTTON -->
+
+<a class="whatsapp" href="#">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

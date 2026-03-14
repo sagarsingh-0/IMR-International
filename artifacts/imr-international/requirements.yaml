@@ -1,0 +1,17 @@
+packages:
+  "framer-motion": "Smooth animations for dropdowns, hero section, and news ticker"
+  "clsx": "Utility for constructing className strings conditionally"
+  "tailwind-merge": "Utility to safely merge Tailwind CSS classes"
+
+images:
+  - path: "artifacts/imr-international/public/images/logo.png"
+    description: "A professional, modern logo mark for an educational institution named 'IMR International'. It should feature a clean geometric crest or modern abstract book/tech icon in navy blue and gold on a transparent background."
+    aspect_ratio: "1:1"
+  - path: "artifacts/imr-international/public/images/hero-bg.png"
+    description: "A stunning, slightly abstract high-quality background for an educational technology university. Deep navy blue and bright azure tones with subtle glowing digital nodes, geometric patterns, or modern campus architecture fused with tech lines."
+    aspect_ratio: "16:9"
+
+notes:
+  - Frontend-only application as requested.
+  - Complex nested navigation implemented using CSS and basic React state for robust performance.
+  - Using Framer Motion for elegant entry animations and scrolling ticker.
