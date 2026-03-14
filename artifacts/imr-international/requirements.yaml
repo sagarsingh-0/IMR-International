@@ -1,17 +1,18 @@
 packages:
-  "framer-motion": "Smooth animations for dropdowns, hero section, and news ticker"
+  "react-hook-form": "For robust form state management"
+  "@hookform/resolvers": "For Zod validation integration"
+  "zod": "For schema-based form validation"
+  "framer-motion": "For page transitions and smooth animations"
+  "lucide-react": "For beautiful icons"
   "clsx": "Utility for constructing className strings conditionally"
-  "tailwind-merge": "Utility to safely merge Tailwind CSS classes"
-
+  "tailwind-merge": "Utility for merging tailwind classes safely"
 images:
-  - path: "artifacts/imr-international/public/images/logo.png"
-    description: "A professional, modern logo mark for an educational institution named 'IMR International'. It should feature a clean geometric crest or modern abstract book/tech icon in navy blue and gold on a transparent background."
-    aspect_ratio: "1:1"
-  - path: "artifacts/imr-international/public/images/hero-bg.png"
-    description: "A stunning, slightly abstract high-quality background for an educational technology university. Deep navy blue and bright azure tones with subtle glowing digital nodes, geometric patterns, or modern campus architecture fused with tech lines."
+  - path: "artifacts/imr-international/public/images/auth-bg.png"
+    description: "Abstract architectural background with dark navy and gold accents, professional university feel, out of focus blur"
     aspect_ratio: "16:9"
-
+  - path: "artifacts/imr-international/public/images/page-header.png"
+    description: "Abstract geometric background in deep blue with subtle gold glowing lines for page headers"
+    aspect_ratio: "16:9"
 notes:
-  - Frontend-only application as requested.
-  - Complex nested navigation implemented using CSS and basic React state for robust performance.
-  - Using Framer Motion for elegant entry animations and scrolling ticker.
+  - Expects endpoints generated via OpenAPI spec (/api/auth/login, etc.)
+  - React Query context provided in App.tsx

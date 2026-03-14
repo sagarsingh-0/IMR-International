@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, ArrowRight, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Link } from "wouter";
 
 export function Footer() {
   return (
@@ -35,12 +36,18 @@ export function Footer() {
               IMR International
             </h4>
             <ul className="space-y-3">
-              {['Mission & Vision', 'Executive Board Member', 'Advisory Board Member', 'Governing Body', 'President Message'].map((item, i) => (
+              {[
+                { title: 'Mission & Vision', href: '/about/mission-vision' },
+                { title: 'Executive Board Member', href: '/about/executive-board' },
+                { title: 'Advisory Board Member', href: '/about/advisory-board' },
+                { title: 'Governing Body', href: '/about/governing-body' },
+                { title: 'President Message', href: '/about/president-message' }
+              ].map((item, i) => (
                 <li key={i}>
-                  <a href="#" className="text-sm hover:text-accent flex items-center gap-2 group transition-colors">
+                  <Link href={item.href} className="text-sm hover:text-accent flex items-center gap-2 group transition-colors">
                     <ArrowRight className="w-3 h-3 text-primary group-hover:text-accent transition-colors" />
-                    {item}
-                  </a>
+                    {item.title}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -53,12 +60,18 @@ export function Footer() {
               Smart Education
             </h4>
             <ul className="space-y-3">
-              {['Bachelor of Business Administration', 'Bachelor of Computer Application', 'Bachelor of Science in Data Science', 'Skill-Based Program', 'Campus to Corporate'].map((item, i) => (
+              {[
+                { title: 'Bachelor of Business Administration', href: '/education/bba' },
+                { title: 'Bachelor of Computer Application', href: '/education/bca' },
+                { title: 'Bachelor of Science in Data Science', href: '/education/bsc-data-science' },
+                { title: 'Skill-Based Program', href: '/education/skill-based-program' },
+                { title: 'Campus to Corporate', href: '/education/campus-to-corporate' }
+              ].map((item, i) => (
                 <li key={i}>
-                  <a href="#" className="text-sm hover:text-accent flex items-center gap-2 group transition-colors">
+                  <Link href={item.href} className="text-sm hover:text-accent flex items-center gap-2 group transition-colors">
                     <ArrowRight className="w-3 h-3 text-primary group-hover:text-accent transition-colors" />
-                    {item}
-                  </a>
+                    {item.title}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -71,12 +84,18 @@ export function Footer() {
               Digital Certification
             </h4>
             <ul className="space-y-3">
-              {['AI & Machine Learning', 'Data Science', 'Blockchain Technology', 'Digital Marketing', 'Ethical Hacking'].map((item, i) => (
+              {[
+                { title: 'AI & Machine Learning', href: '/certification/ai-machine-learning' },
+                { title: 'Data Science', href: '/certification/data-science-python' },
+                { title: 'Blockchain Technology', href: '/certification/blockchain-technology' },
+                { title: 'Digital Marketing', href: '/certification/digital-marketing' },
+                { title: 'Ethical Hacking', href: '/certification/ethical-hacking' }
+              ].map((item, i) => (
                 <li key={i}>
-                  <a href="#" className="text-sm hover:text-accent flex items-center gap-2 group transition-colors">
+                  <Link href={item.href} className="text-sm hover:text-accent flex items-center gap-2 group transition-colors">
                     <ArrowRight className="w-3 h-3 text-primary group-hover:text-accent transition-colors" />
-                    {item}
-                  </a>
+                    {item.title}
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -1,6 +1,21 @@
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, LogIn, User, LogOut } from "lucide-react";
+import { Link } from "wouter";
+import { useAuth } from "@/lib/auth";
+import { useLogout } from "@workspace/api-client-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { getGetMeQueryKey } from "@workspace/api-client-react";
 
 export function TopBar() {
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+  const { mutate: logout } = useLogout({
+    mutation: {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: getGetMeQueryKey() });
+      }
+    }
+  });
+
   return (
     <div className="bg-primary text-primary-foreground py-2 text-sm font-medium">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -13,10 +28,38 @@ export function TopBar() {
             <Phone className="w-4 h-4 text-accent" />
             <span>+91-9938080165</span>
           </a>
-          <a href="mailto:imrinternational11@gmail.com" className="flex items-center gap-2 hover:text-accent transition-colors duration-200">
+          <a href="mailto:imrinternational11@gmail.com" className="hidden lg:flex items-center gap-2 hover:text-accent transition-colors duration-200">
             <Mail className="w-4 h-4 text-accent" />
-            <span className="hidden sm:inline">imrinternational11@gmail.com</span>
+            <span>imrinternational11@gmail.com</span>
           </a>
+          
+          <div className="h-4 w-px bg-primary-foreground/30 hidden sm:block"></div>
+          
+          {user ? (
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1.5 text-accent font-semibold">
+                <User className="w-4 h-4" />
+                {user.name}
+              </span>
+              <button 
+                onClick={() => logout()}
+                className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link href="/login" className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200">
+                <LogIn className="w-4 h-4" />
+                Login
+              </Link>
+              <Link href="/register" className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200">
+                Register
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

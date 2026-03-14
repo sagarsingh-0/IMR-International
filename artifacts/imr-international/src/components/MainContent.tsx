@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { Play, CheckCircle2, ChevronRight, Award, Laptop, Users } from "lucide-react";
+import { useLocation } from "wouter";
 
 const CERTIFICATIONS = [
-  "AI & Machine Learning",
-  "Data Science with Python",
-  "Business Data Analytics",
-  "Ethical Hacking",
-  "Blockchain Technology",
-  "Digital Marketing",
-  "Project Management"
+  { title: "AI & Machine Learning", slug: "ai-machine-learning" },
+  { title: "Data Science with Python", slug: "data-science-python" },
+  { title: "Business Data Analytics", slug: "business-data-analytics" },
+  { title: "Ethical Hacking", slug: "ethical-hacking" },
+  { title: "Blockchain Technology", slug: "blockchain-technology" },
+  { title: "Digital Marketing", slug: "digital-marketing" },
+  { title: "Project Management", slug: "project-management" }
 ];
 
 const STATS = [
@@ -18,6 +19,8 @@ const STATS = [
 ];
 
 export function MainContent() {
+  const [, setLocation] = useLocation();
+
   return (
     <section className="py-24 bg-gradient-to-b from-background to-muted/30 relative">
       {/* Decorative blobs */}
@@ -53,7 +56,6 @@ export function MainContent() {
             </div>
 
             <div className="pt-4 relative rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-border/50 bg-card">
-              {/* Unsplash image for the video placeholder */}
               {/* diverse students learning together in modern classroom university */}
               <img 
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=600&fit=crop" 
@@ -96,6 +98,7 @@ export function MainContent() {
                 {CERTIFICATIONS.map((cert, idx) => (
                   <motion.div 
                     key={idx}
+                    onClick={() => setLocation(`/certification/${cert.slug}`)}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -106,14 +109,17 @@ export function MainContent() {
                       <CheckCircle2 className="w-5 h-5 text-primary group-hover:text-accent" />
                     </div>
                     <span className="ml-4 font-semibold text-foreground group-hover:text-white transition-colors">
-                      {cert}
+                      {cert.title}
                     </span>
                     <ChevronRight className="ml-auto w-5 h-5 text-muted-foreground group-hover:text-white/70 transition-transform group-hover:translate-x-1" />
                   </motion.div>
                 ))}
               </div>
 
-              <button className="w-full mt-8 py-4 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+              <button 
+                onClick={() => setLocation('/certification/ai-machine-learning')}
+                className="w-full mt-8 py-4 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+              >
                 View All Programs
                 <ChevronRight className="w-4 h-4" />
               </button>
