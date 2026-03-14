@@ -3,11 +3,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/lib/auth";
+import { ChatBot } from "@/components/ChatBot";
 
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Enquiry from "@/pages/Enquiry";
+import Programs from "@/pages/Programs";
 import DynamicPage from "@/pages/DynamicPage";
 import NotFound from "@/pages/not-found";
 
@@ -27,6 +29,7 @@ function Router() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/admission/enquiry" component={Enquiry} />
+      <Route path="/programs" component={Programs} />
       <Route path="/:category/:slug">
         {() => <DynamicPage />}
       </Route>
@@ -42,6 +45,7 @@ function App() {
         <TooltipProvider>
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
             <Router />
+            <ChatBot />
           </WouterRouter>
           <Toaster />
         </TooltipProvider>

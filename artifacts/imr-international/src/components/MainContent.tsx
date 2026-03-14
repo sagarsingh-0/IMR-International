@@ -117,7 +117,7 @@ export function MainContent() {
               </div>
 
               <button 
-                onClick={() => setLocation('/certification/ai-machine-learning')}
+                onClick={() => setLocation('/programs')}
                 className="w-full mt-8 py-4 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
               >
                 View All Programs
