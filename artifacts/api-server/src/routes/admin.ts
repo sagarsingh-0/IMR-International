@@ -22,11 +22,13 @@ function requireAdmin(req: Request, res: Response, next: () => void) {
 }
 
 // Allowed tables + columns to omit (sensitive fields)
+// All tables are READ-ONLY via this viewer — no deletion or editing allowed.
 const ALLOWED_TABLES: Record<string, { omit?: string[] }> = {
   users:            { omit: ["password_hash"] },
   enquiries:        {},
   analytics_events: {},
   consent_logs:     {},
+  visitor_logs:     {},
   conversations:    {},
   messages:         {},
 };
@@ -165,23 +167,7 @@ router.get("/db/:table", requireAdmin, async (req, res) => {
   }
 });
 
-// DELETE /api/admin/db/:table/:id — delete a single row by id
-router.delete("/db/:table/:id", requireAdmin, async (req, res) => {
-  const { table, id } = req.params;
-  if (!ALLOWED_TABLES[table]) {
-    return res.status(403).json({ error: "Access to this table is not allowed" });
-  }
-  // Don't allow deleting users via this route for safety
-  if (table === "users") {
-    return res.status(403).json({ error: "User deletion requires elevated confirmation" });
-  }
-  try {
-    await pool.query(`DELETE FROM ${table} WHERE id = $1`, [id]);
-    return res.json({ success: true });
-  } catch (err) {
-    console.error(`Delete row error:`, err);
-    return res.status(500).json({ error: "Failed to delete row" });
-  }
-});
+// DELETE is intentionally disabled — all data is immutable via this API.
+// No route exists for deletion to protect the integrity of visitor records.
 
 export default router;

@@ -35,10 +35,34 @@ async function sendEvent(eventType: string, page: string, element?: string) {
   }
 }
 
+// ── Server-side visitor log (no consent required — no PII stored) ────────────
+// Fires a lightweight record to the server for every page visit.
+// IP is one-way hashed server-side. No names, emails, or identifiers collected.
+function logVisit(path: string) {
+  try {
+    navigator.sendBeacon(
+      `${API_BASE}/api/visitor-log`,
+      new Blob(
+        [JSON.stringify({ page: path, referrer: document.referrer || null })],
+        { type: "application/json" }
+      )
+    );
+  } catch {
+    // Silent fail
+    fetch(`${API_BASE}/api/visitor-log`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ page: path, referrer: document.referrer || null }),
+      keepalive: true,
+    }).catch(() => {});
+  }
+}
+
 // ── Public API ──────────────────────────────────────────────────────────────
 
 export function trackPageView(path: string) {
-  sendEvent("page_view", path);
+  logVisit(path);        // always — no consent needed, no PII
+  sendEvent("page_view", path); // only when consent given
 }
 
 export function trackClick(element: string, page: string) {

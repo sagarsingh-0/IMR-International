@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Database, Table2, Search, RefreshCw, ChevronLeft, ChevronRight,
-  Trash2, ArrowLeft, BarChart2, AlertCircle, Download, Shield, Eye,
+  BarChart2, Download, Shield, Eye, Lock,
   Users, MessageSquare, FileText, Activity, ClipboardList, Hash,
 } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
@@ -33,6 +33,7 @@ const TABLE_THEME: Record<string, { icon: React.ComponentType<{ className?: stri
   enquiries:        { icon: ClipboardList,color: "text-amber-600",  bg: "bg-amber-500",  light: "bg-amber-50 border-amber-200"  },
   analytics_events: { icon: Activity,     color: "text-emerald-600",bg: "bg-emerald-600",light: "bg-emerald-50 border-emerald-200"},
   consent_logs:     { icon: Shield,       color: "text-violet-600", bg: "bg-violet-600", light: "bg-violet-50 border-violet-200" },
+  visitor_logs:     { icon: Eye,          color: "text-orange-600", bg: "bg-orange-500", light: "bg-orange-50 border-orange-200" },
   conversations:    { icon: MessageSquare,color: "text-cyan-600",   bg: "bg-cyan-600",   light: "bg-cyan-50 border-cyan-200"    },
   messages:         { icon: FileText,     color: "text-rose-600",   bg: "bg-rose-600",   light: "bg-rose-50 border-rose-200"    },
 };
@@ -59,7 +60,6 @@ export default function AdminDatabase() {
   const [tablesLoading, setTablesLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   // Auth guard
   useEffect(() => {
@@ -100,15 +100,6 @@ export default function AdminDatabase() {
 
   const handleSearch = (q: string) => { setSearch(q); setPage(1); loadTable(activeTable, 1, q); };
   const handlePage = (p: number) => { setPage(p); loadTable(activeTable, p, search); };
-
-  const handleDelete = async (id: string) => {
-    await fetch(`${BASE_URL}/api/admin/db/${activeTable}/${id}`, { method: "DELETE", credentials: "include" });
-    setDeleteConfirm(null);
-    loadTable(activeTable, page, search);
-    // refresh count
-    fetch(`${BASE_URL}/api/admin/db/tables`, { credentials: "include" })
-      .then(r => r.json()).then(setTables);
-  };
 
   const exportCSV = () => {
     if (!tableData) return;
@@ -287,7 +278,6 @@ export default function AdminDatabase() {
                                 {col}
                               </th>
                             ))}
-                            <th className="px-4 py-3 text-slate-400 font-bold uppercase tracking-wide text-right">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -314,24 +304,6 @@ export default function AdminDatabase() {
                                       )}
                                     </td>
                                   ))}
-                                  <td className="px-4 py-2.5 text-right">
-                                    {activeTable !== "users" && (
-                                      deleteConfirm === rowId ? (
-                                        <span className="flex items-center gap-1 justify-end">
-                                          <span className="text-rose-500 text-[10px] font-medium">Delete?</span>
-                                          <button onClick={() => handleDelete(rowId)}
-                                            className="px-2 py-0.5 bg-rose-500 text-white rounded text-[10px] font-bold hover:bg-rose-600 transition-colors">Yes</button>
-                                          <button onClick={() => setDeleteConfirm(null)}
-                                            className="px-2 py-0.5 bg-slate-200 text-slate-600 rounded text-[10px] font-medium hover:bg-slate-300 transition-colors">No</button>
-                                        </span>
-                                      ) : (
-                                        <button onClick={() => setDeleteConfirm(rowId)}
-                                          className="w-7 h-7 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 flex items-center justify-center ml-auto transition-all">
-                                          <Trash2 className="w-3.5 h-3.5" />
-                                        </button>
-                                      )
-                                    )}
-                                  </td>
                                 </motion.tr>
                               );
                             })}
@@ -378,8 +350,8 @@ export default function AdminDatabase() {
 
                 {/* Security note */}
                 <p className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-3">
-                  <Shield className="w-3 h-3" />
-                  Sensitive fields (passwords, hashes) are hidden. User deletion is disabled for safety.
+                  <Lock className="w-3 h-3" />
+                  All data is read-only. Records cannot be deleted or edited — this protects the integrity of visitor and enquiry data.
                 </p>
               </motion.div>
             )}
