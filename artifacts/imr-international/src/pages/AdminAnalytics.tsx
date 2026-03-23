@@ -7,7 +7,7 @@ import {
 } from "recharts";
 import {
   Users, Eye, Clock, TrendingUp, TrendingDown, ArrowLeft,
-  Download, RefreshCw, Shield, BarChart2, Activity, Star,
+  Download, RefreshCw, Shield, BarChart2, Activity, Star, Database,
 } from "lucide-react";
 import { TopBar } from "@/components/TopBar";
 import { Navigation } from "@/components/Navigation";
@@ -199,6 +199,12 @@ export default function AdminAnalytics() {
                   className="flex items-center gap-1.5 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-xl text-sm font-bold transition-all shadow-lg"
                 >
                   <Download className="w-4 h-4" /> Export CSV
+                </button>
+                <button
+                  onClick={() => setLocation("/admin/database")}
+                  className="flex items-center gap-1.5 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl text-sm font-bold transition-all"
+                >
+                  <Database className="w-4 h-4" /> Database
                 </button>
                 <button
                   onClick={handleLogout}

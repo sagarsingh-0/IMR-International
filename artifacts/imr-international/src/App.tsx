@@ -15,6 +15,7 @@ import Programs from "@/pages/Programs";
 import DynamicPage from "@/pages/DynamicPage";
 import AdminAnalytics from "@/pages/AdminAnalytics";
 import AdminLogin from "@/pages/AdminLogin";
+import AdminDatabase from "@/pages/AdminDatabase";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -39,6 +40,7 @@ function TrackedRouter() {
       <Route path="/programs" component={Programs} />
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin/analytics" component={AdminAnalytics} />
+      <Route path="/admin/database" component={AdminDatabase} />
       <Route path="/:category/:slug">
         {() => <DynamicPage />}
       </Route>
