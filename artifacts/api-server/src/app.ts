@@ -3,8 +3,14 @@ import cors from "cors";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import crypto from "crypto";
+import path from "path";
+import { fileURLToPath } from "url";
+import { existsSync } from "fs";
 import { pool } from "@workspace/db";
 import router from "./routes";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PgSession = connectPgSimple(session);
 
@@ -68,5 +74,19 @@ app.use("/api/visitor-log", express.json(), async (req: Request, res: Response, 
 });
 
 app.use("/api", router);
+
+// ── Serve built frontend in production ────────────────────────────────────────
+// In development the Vite dev server handles the frontend separately.
+// In production (after `pnpm build`) we serve the compiled static files here.
+if (process.env["NODE_ENV"] === "production") {
+  const frontendDist = path.resolve(__dirname, "../../imr-international/dist/public");
+  if (existsSync(frontendDist)) {
+    app.use(express.static(frontendDist));
+    // All non-API routes fall through to the SPA index.html
+    app.get("*", (_req: Request, res: Response) => {
+      res.sendFile(path.join(frontendDist, "index.html"));
+    });
+  }
+}
 
 export default app;
