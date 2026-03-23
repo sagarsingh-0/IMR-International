@@ -92,7 +92,23 @@ export default function AdminAnalytics() {
   const [summary, setSummary] = useState<SummaryData | null>(null);
   const [interests, setInterests] = useState<InterestsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
+
+  // Guard: verify admin session on mount
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/admin/me`, { credentials: "include" })
+      .then(res => {
+        if (!res.ok) setLocation("/admin/login");
+        else setAuthChecked(true);
+      })
+      .catch(() => setLocation("/admin/login"));
+  }, []);
+
+  const handleLogout = async () => {
+    await fetch(`${BASE_URL}/api/admin/logout`, { method: "POST", credentials: "include" });
+    setLocation("/admin/login");
+  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -112,7 +128,7 @@ export default function AdminAnalytics() {
     }
   };
 
-  useEffect(() => { fetchData(); }, [period, refreshKey]);
+  useEffect(() => { if (authChecked) fetchData(); }, [period, refreshKey, authChecked]);
 
   const exportCSV = () => {
     if (!data?.topPages) return;
@@ -128,6 +144,9 @@ export default function AdminAnalytics() {
   };
 
   const PERIOD_LABELS: Record<Period, string> = { daily: "Today", weekly: "Last 7 Days", monthly: "Last 30 Days" };
+
+  // Show blank while checking auth (redirect handled in useEffect)
+  if (!authChecked) return null;
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-slate-50">
@@ -180,6 +199,12 @@ export default function AdminAnalytics() {
                   className="flex items-center gap-1.5 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-xl text-sm font-bold transition-all shadow-lg"
                 >
                   <Download className="w-4 h-4" /> Export CSV
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-1.5 px-4 py-2 bg-white/10 hover:bg-rose-500 border border-white/20 hover:border-rose-400 text-white rounded-xl text-sm font-bold transition-all"
+                >
+                  Sign Out
                 </button>
               </div>
             </div>

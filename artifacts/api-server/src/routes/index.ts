@@ -6,6 +6,7 @@ import chatRouter from "./chat";
 import consentRouter from "./consent";
 import eventsRouter from "./events";
 import analyticsRouter from "./analytics";
+import adminRouter from "./admin";
 
 const router: IRouter = Router();
 
@@ -18,5 +19,8 @@ router.use("/chat", chatRouter);
 router.use("/consent", consentRouter);
 router.use("/events", eventsRouter);
 router.use("/analytics", analyticsRouter);
+
+// Admin auth
+router.use("/admin", adminRouter);
 
 export default router;
