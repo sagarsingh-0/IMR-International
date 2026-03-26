@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "LJFUoqChFq2LCM_CsG2zJ"
+uri = "file://IMR_International_Website_Report.md"
+type = "text"
+title = "IMR International — Website Report"
