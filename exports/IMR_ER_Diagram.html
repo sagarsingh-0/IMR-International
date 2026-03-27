@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>IMR International — ER Diagram</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f4f8;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      background: #0a1f44;
+      color: #f5a623;
+      padding: 18px 30px;
+      border-radius: 10px;
+      font-size: 22px;
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .group-label {
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      padding: 4px 8px;
+      border-radius: 5px;
+    }
+    .table-wrap { display: flex; flex-direction: column; gap: 16px; }
+    .table-box { border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.12); }
+    .table-header {
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: white;
+    }
+    .table-body { background: white; }
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      font-size: 12px;
+      border-bottom: 1px solid #f0f0f0;
+      color: #333;
+    }
+    .field-row:last-child { border-bottom: none; }
+    .field-name { font-weight: 600; color: #111; min-width: 120px; }
+    .field-type { color: #555; font-size: 11px; }
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .badge-pk { background: #fef3c7; color: #92400e; }
+    .badge-fk { background: #dbeafe; color: #1e40af; }
+    .badge-uq { background: #d1fae5; color: #065f46; }
+    .badge-nn { background: #f3f4f6; color: #374151; }
+    .badge-hash { background: #ede9fe; color: #4c1d95; }
+
+    /* Table color themes */
+    .blue   .table-header { background: #1e40af; }
+    .violet .table-header { background: #6d28d9; }
+    .green  .table-header { background: #15803d; }
+    .yellow .table-header { background: #b45309; }
+    .orange .table-header { background: #c2410c; }
+    .red    .table-header { background: #b91c1c; }
+
+    .blue   .table-box { border: 1.5px solid #93c5fd; }
+    .violet .table-box { border: 1.5px solid #c4b5fd; }
+    .green  .table-box { border: 1.5px solid #86efac; }
+    .yellow .table-box { border: 1.5px solid #fcd34d; }
+    .orange .table-box { border: 1.5px solid #fdba74; }
+    .red    .table-box { border: 1.5px solid #fca5a5; }
+
+    .blue   .group-label { background: #dbeafe; color: #1e40af; }
+    .violet .group-label { background: #ede9fe; color: #5b21b6; }
+    .green  .group-label { background: #dcfce7; color: #15803d; }
+    .yellow .group-label { background: #fef9c3; color: #92400e; }
+    .orange .group-label { background: #ffedd5; color: #c2410c; }
+    .red    .group-label { background: #fee2e2; color: #b91c1c; }
+
+    .relationships {
+      max-width: 1300px;
+      margin: 26px auto 0;
+      background: white;
+      border-radius: 10px;
+      padding: 20px 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .relationships h2 {
+      font-size: 14px;
+      color: #0a1f44;
+      margin-bottom: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .rel-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+    }
+    .rel-row:last-child { border-bottom: none; }
+    .rel-from { font-weight: 700; color: #1e40af; min-width: 140px; }
+    .rel-type { background: #0a1f44; color: white; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .rel-to { font-weight: 700; color: #15803d; min-width: 140px; }
+    .rel-desc { color: #555; font-size: 12px; }
+    .arrow { font-size: 18px; color: #aaa; }
+
+    .legend {
+      max-width: 1300px;
+      margin: 16px auto 0;
+      background: #0a1f44;
+      border-radius: 10px;
+      padding: 16px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .legend-title { color: #f5a623; font-weight: 700; font-size: 13px; margin-right: 8px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; color: white; font-size: 12px; }
+
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      color: #888;
+      font-size: 11px;
+    }
+
+    @media print {
+      body { background: white; padding: 10px; }
+      .grid { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🗄️ IMR International — Entity Relationship Diagram (ERD)</h1>
+
+  <div class="grid">
+
+    <!-- COL 1: USER MANAGEMENT -->
+    <div class="table-wrap blue">
+      <div class="group-label">👤 User Management</div>
+      <div class="table-box">
+        <div class="table-header">USERS</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">id</span><span class="field-type">INTEGER — Auto</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">name</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-uq">UQ</span><span class="field-name">email</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">password_hash</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">phone</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">created_at</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+
+      <div class="table-box" style="margin-top: 6px;">
+        <div class="table-header" style="background:#6d28d9;">SESSIONS</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">sid</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">sess</span><span class="field-type">JSON (userId inside)</span></div>
+          <div class="field-row"><span class="field-name">expire</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 2: ENQUIRY + CHAT -->
+    <div class="table-wrap green">
+      <div class="group-label">📋 Enquiry</div>
+      <div class="table-box">
+        <div class="table-header">ENQUIRIES</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">id</span><span class="field-type">INTEGER — Auto</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">name</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">email</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">phone</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">program</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">message</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">created_at</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+
+      <div class="table-box yellow" style="margin-top: 6px; border-color:#fcd34d !important;">
+        <div class="table-header" style="background:#b45309;">CONVERSATIONS</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">id</span><span class="field-type">INTEGER — Auto</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">title</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">created_at</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 3: MESSAGES + ANALYTICS -->
+    <div class="table-wrap orange">
+      <div class="group-label">📊 Analytics & Chat</div>
+      <div class="table-box yellow" style="border-color:#fcd34d !important;">
+        <div class="table-header" style="background:#b45309;">MESSAGES</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">id</span><span class="field-type">INTEGER — Auto</span></div>
+          <div class="field-row"><span class="badge badge-fk">FK</span><span class="field-name">conversation_id</span><span class="field-type">INTEGER</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">role</span><span class="field-type">TEXT (user/assistant)</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">content</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">created_at</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+
+      <div class="table-box" style="margin-top:6px; border-color:#fdba74 !important;">
+        <div class="table-header" style="background:#c2410c;">ANALYTICS_EVENTS</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">id</span><span class="field-type">INTEGER — Auto</span></div>
+          <div class="field-row"><span class="badge badge-hash">SHA</span><span class="field-name">hashed_session_id</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">event_type</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">page</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">element</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">timestamp</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 4: PRIVACY -->
+    <div class="table-wrap red">
+      <div class="group-label">🔒 Privacy & Logs</div>
+      <div class="table-box">
+        <div class="table-header">CONSENT_LOGS</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">id</span><span class="field-type">INTEGER — Auto</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">status</span><span class="field-type">TEXT (accepted/rejected)</span></div>
+          <div class="field-row"><span class="field-name">ip_address</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">timestamp</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+
+      <div class="table-box" style="margin-top:6px;">
+        <div class="table-header">VISITOR_LOGS</div>
+        <div class="table-body">
+          <div class="field-row"><span class="badge badge-pk">PK</span><span class="field-name">id</span><span class="field-type">INTEGER — Auto</span></div>
+          <div class="field-row"><span class="badge badge-nn">NN</span><span class="field-name">page</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">referrer</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">user_agent</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="badge badge-hash">SHA</span><span class="field-name">ip_hash</span><span class="field-type">TEXT (SHA-256)</span></div>
+          <div class="field-row"><span class="field-name">country_hint</span><span class="field-type">TEXT</span></div>
+          <div class="field-row"><span class="field-name">created_at</span><span class="field-type">TIMESTAMP</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RELATIONSHIPS -->
+  <div class="relationships">
+    <h2>🔗 Relationships</h2>
+    <div class="rel-row">
+      <span class="rel-from">USERS</span>
+      <span class="arrow">→</span>
+      <span class="rel-type">1 : 1</span>
+      <span class="arrow">→</span>
+      <span class="rel-to">SESSIONS</span>
+      <span class="rel-desc">One user has one active login session. The session stores userId internally.</span>
+    </div>
+    <div class="rel-row">
+      <span class="rel-from">CONVERSATIONS</span>
+      <span class="arrow">→</span>
+      <span class="rel-type">1 : N</span>
+      <span class="arrow">→</span>
+      <span class="rel-to">MESSAGES</span>
+      <span class="rel-desc">One conversation contains many messages (linked via conversation_id FK). CASCADE DELETE — deleting a conversation removes all its messages.</span>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span class="legend-title">LEGEND:</span>
+    <span class="legend-item"><span class="badge badge-pk">PK</span> Primary Key — Unique identifier</span>
+    <span class="legend-item"><span class="badge badge-fk">FK</span> Foreign Key — Links to another table</span>
+    <span class="legend-item"><span class="badge badge-uq">UQ</span> Unique — No duplicate values</span>
+    <span class="legend-item"><span class="badge badge-nn">NN</span> Not Null — Field is required</span>
+    <span class="legend-item"><span class="badge badge-hash">SHA</span> SHA-256 Hashed — Anonymous, cannot be reversed</span>
+  </div>
+
+  <div class="footer">
+    IMR International &nbsp;|&nbsp; Smart • Digital • Innovation &nbsp;|&nbsp; Generated March 26, 2026
+  </div>
+
+</body>
+</html>
