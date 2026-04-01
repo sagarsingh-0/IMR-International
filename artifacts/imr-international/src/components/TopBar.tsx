@@ -1,20 +1,35 @@
 import { MapPin, Phone, Mail, LogIn, User, LogOut } from "lucide-react";
 import { Link } from "wouter";
 import { useAuth } from "@/lib/auth";
-import { useLogout } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { getGetMeQueryKey } from "@workspace/api-client-react";
+import { useState } from "react";
 
 export function TopBar() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const { mutate: logout } = useLogout({
-    mutation: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetMeQueryKey() });
-      }
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    if (isLoggingOut) return;
+    setIsLoggingOut(true);
+    try {
+      // Call the logout API to destroy the server-side session
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch {
+      // Ignore errors — we always log out locally
+    } finally {
+      // Cancel any in-flight /api/auth/me requests so they don't bring the user back
+      await queryClient.cancelQueries({ queryKey: getGetMeQueryKey() });
+      // Wipe the cached user data completely
+      queryClient.removeQueries({ queryKey: getGetMeQueryKey() });
+      // Hard redirect — kills all React state and guarantees a clean slate
+      window.location.href = "/";
     }
-  });
+  };
 
   return (
     <div className="bg-primary text-primary-foreground py-2 text-sm font-medium">
@@ -42,11 +57,12 @@ export function TopBar() {
                 {user.name}
               </span>
               <button 
-                onClick={() => logout()}
-                className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200"
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+                className="flex items-center gap-1.5 hover:text-accent transition-colors duration-200 disabled:opacity-60"
               >
-                <LogOut className="w-4 h-4" />
-                Logout
+                <LogOut className={`w-4 h-4 ${isLoggingOut ? "animate-spin" : ""}`} />
+                {isLoggingOut ? "Logging out..." : "Logout"}
               </button>
             </div>
           ) : (

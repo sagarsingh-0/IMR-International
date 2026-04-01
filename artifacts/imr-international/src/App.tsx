@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/lib/auth";
 import { ChatBot } from "@/components/ChatBot";
 import { ConsentBanner } from "@/components/ConsentBanner";
+import ScrollToTop from "@/components/ScrollToTop";
 import { usePageTracking } from "@/lib/useTracker";
 
 import Home from "@/pages/Home";
@@ -56,6 +57,7 @@ function App() {
         <TooltipProvider>
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
             <TrackedRouter />
+            <ScrollToTop />
             <ChatBot />
             <ConsentBanner />
           </WouterRouter>

@@ -1,5 +1,6 @@
-import { MapPin, Phone, Mail, ArrowRight, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
+import { WithdrawConsentLink } from "./ConsentBanner";
 
 export function Footer() {
   return (
@@ -107,20 +108,7 @@ export function Footer() {
           <p className="text-sm text-slate-500">
             &copy; {new Date().getFullYear()} IMR International. All rights reserved.
           </p>
-          <div className="flex gap-4">
-            <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-              <Facebook className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-              <Twitter className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-              <Linkedin className="w-4 h-4" />
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-              <Instagram className="w-4 h-4" />
-            </a>
-          </div>
+          <WithdrawConsentLink />
         </div>
       </div>
     </footer>

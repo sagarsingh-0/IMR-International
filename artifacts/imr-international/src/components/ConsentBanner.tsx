@@ -10,8 +10,7 @@ export function ConsentBanner() {
   useEffect(() => {
     const existing = getConsent();
     if (!existing) {
-      const timer = setTimeout(() => setVisible(true), 1200);
-      return () => clearTimeout(timer);
+      setVisible(true);
     }
   }, []);
 

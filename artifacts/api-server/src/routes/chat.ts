@@ -52,6 +52,11 @@ router.post("/", async (req: Request, res: Response) => {
       return;
     }
 
+    if (!openai) {
+      res.status(503).json({ error: "AI chat is not configured on this server." });
+      return;
+    }
+
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");

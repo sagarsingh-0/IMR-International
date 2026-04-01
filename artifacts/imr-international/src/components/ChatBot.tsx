@@ -16,9 +16,107 @@ const QUICK_QUESTIONS = [
   "What programs are available?",
   "How to apply for admission?",
   "Tell me about BBA program",
-  "AI & Machine Learning course details",
+  "AI & Machine Learning course",
   "Scholarship information",
 ];
+
+// ─── Rule-based responses ──────────────────────────────────────────────────────
+function getLocalResponse(input: string): string {
+  const q = input.toLowerCase().trim();
+
+  // Programs list
+  if (/(what|which|list|all|show).*(program|course|offer|available)/i.test(q) || q === "programs") {
+    return `🎓 **IMR International offers three categories of programs:**\n\n**Professional Degree Programs (3 years):**\n• BBA – Bachelor of Business Administration\n• BCA – Bachelor of Computer Application\n• BSc Data Science\n\n**Digital Certifications (Short-term):**\n• AI & Machine Learning (6 months)\n• Data Science with Python & R (4 months)\n• Ethical Hacking, Blockchain, Digital Marketing & more\n\n**Corporate Education:**\n• Skill-Based Programs, Leadership, Campus to Corporate\n\nType a program name to know more details!`;
+  }
+
+  // BBA
+  if (/\bbba\b|business administration/i.test(q)) {
+    return `📚 **BBA – Bachelor of Business Administration**\n\n• Duration: 3 years (6 semesters)\n• Eligibility: 10+2 in any stream\n• Average Salary: ₹4–8 LPA after graduation\n• Placement Rate: 85%+\n\n**Highlights:**\n✅ Industry-integrated curriculum\n✅ Live projects & internships\n✅ Leadership & entrepreneurship modules\n✅ 10,000+ alumni network\n\nClick **"Apply Now"** on our website or contact us at +91-9938080165!`;
+  }
+
+  // BCA
+  if (/\bbca\b|computer application/i.test(q)) {
+    return `💻 **BCA – Bachelor of Computer Application**\n\n• Duration: 3 years (6 semesters)\n• Eligibility: 10+2 with Mathematics\n• Average Salary: ₹5–10 LPA\n• Placement Rate: 88%+\n\n**Highlights:**\n✅ Full-stack development training\n✅ Cloud computing & DevOps modules\n✅ Industry certifications included\n✅ Hackathons & coding competitions\n\nInterested? Call us at +91-9938080165!`;
+  }
+
+  // BSc Data Science
+  if (/bsc|data science degree|bachelor.*data/i.test(q)) {
+    return `📊 **BSc Data Science**\n\n• Duration: 3 years (6 semesters)\n• Eligibility: 10+2 with Science/Mathematics\n• Average Salary: ₹6–12 LPA\n• One of the fastest-growing fields!\n\n**Highlights:**\n✅ Python, R, SQL, Machine Learning\n✅ Real-world datasets & projects\n✅ Internship with data companies\n✅ AI & analytics tools training\n\nApply now for 2026–27 batch!`;
+  }
+
+  // AI & Machine Learning
+  if (/ai|machine learning|artificial intelligence/i.test(q)) {
+    return `🤖 **AI & Machine Learning Certification**\n\n• Duration: 6 months\n• Mode: Online + Offline (Hybrid)\n• Eligibility: 10+2 or working professionals\n\n**Topics Covered:**\n✅ Python for AI, TensorFlow, PyTorch\n✅ Supervised & Unsupervised Learning\n✅ Deep Learning, Neural Networks\n✅ NLP & Computer Vision\n✅ Real-world AI project\n\n📞 Contact: +91-9938080165\n📧 imrinternational11@gmail.com`;
+  }
+
+  // Data Science cert
+  if (/data science.*cert|certification.*data|python.*data|data.*python/i.test(q)) {
+    return `📈 **Data Science with Python & R Certification**\n\n• Duration: 4 months\n• Perfect for beginners & professionals\n\n**Topics:** Python, R, Pandas, NumPy, Data Visualization, Tableau, Statistical Analysis, Machine Learning basics\n\n📞 Enquire: +91-9938080165`;
+  }
+
+  // Ethical Hacking
+  if (/ethical hack|cybersecurity|hacking|cyber security/i.test(q)) {
+    return `🔐 **Ethical Hacking Certification**\n\n• Duration: 3 months\n• Learn to think like a hacker — defensively!\n\n**Topics:** Network Security, Penetration Testing, OWASP, Kali Linux, Vulnerability Assessment, CEH preparation\n\n📞 Contact: +91-9938080165`;
+  }
+
+  // Digital Marketing
+  if (/digital marketing/i.test(q)) {
+    return `📱 **Digital Marketing Certification**\n\n• Duration: 3 months\n• Ideal for entrepreneurs & marketing professionals\n\n**Topics:** SEO, SEM, Social Media Marketing, Google Ads, Meta Ads, Email Marketing, Analytics, Content Strategy\n\n📞 Contact: +91-9938080165`;
+  }
+
+  // Blockchain
+  if (/blockchain/i.test(q)) {
+    return `⛓️ **Blockchain Technology Certification**\n\n• Duration: 4 months\n• Learn the technology powering Web3!\n\n**Topics:** Blockchain fundamentals, Ethereum, Smart Contracts, DApps, NFTs, Crypto concepts\n\n📞 Contact: +91-9938080165`;
+  }
+
+  // Admission / how to apply
+  if (/how.*apply|admission process|apply|enroll|enroll|register/i.test(q)) {
+    return `📋 **How to Apply to IMR International:**\n\n**Step 1:** Visit our website and click "Admission Enquiry"\n**Step 2:** Fill out the online enquiry form with your details\n**Step 3:** Our team will contact you within 24 hours\n**Step 4:** Complete the registration and document verification\n**Step 5:** Pay the admission fee and confirm your seat\n\n📞 Helpline: +91-9938080165\n📧 Email: imrinternational11@gmail.com\n📍 Visit us: 07 District Centre, CS Pur, Bhubaneswar\n\nAdmissions are open for **2026–27 academic session!**`;
+  }
+
+  // Scholarship
+  if (/scholar|discount|fee waiver|financial|merit/i.test(q)) {
+    return `🏆 **Scholarships at IMR International:**\n\n• **Merit Scholarship** – Up to 100% tuition waiver for top academic performers\n• **Need-Based Scholarship** – Financial support for economically weaker sections\n• **Sports Excellence** – For state/national level athletes\n• **Women in Tech** – Special grants for women in STEM\n• **Alumni Referral** – 10% concession for alumni referrals\n• **Early Bird** – 5% additional discount for early applications\n• **SC/ST/OBC Reservation** – Government-mandated reservations honored\n\nContact us to check your eligibility: +91-9938080165`;
+  }
+
+  // Loan
+  if (/loan|bank|finance|emi|financ/i.test(q)) {
+    return `🏦 **Educational Loan Assistance:**\n\n• Partnered with **10+ national banks** (SBI, BOI, Union Bank, Canara Bank & more)\n• Loan amounts up to **₹15 Lakhs**\n• Starting interest rate: **8.5% p.a.**\n• No collateral required up to ₹7.5 Lakh\n• Repayment begins after course completion or placement\n• Dedicated loan helpdesk at IMR campus\n\n📞 Loan Helpdesk: +91-9938080165`;
+  }
+
+  // Fees / cost
+  if (/fee|cost|price|charge|tuition|how much/i.test(q)) {
+    return `💰 **Program Fees:**\n\nFor accurate and up-to-date fee information, please contact our admissions team directly:\n\n📞 **+91-9938080165**\n📧 **imrinternational11@gmail.com**\n📍 **07 District Centre, CS Pur, Bhubaneswar**\n\nWe also offer flexible payment plans and scholarship options to make education affordable for everyone!`;
+  }
+
+  // Contact / location
+  if (/contact|phone|email|address|location|where|visit|reach/i.test(q)) {
+    return `📍 **Contact IMR International:**\n\n🏫 **Address:** 07 District Centre, CS Pur, Bhubaneswar, Odisha\n📞 **Phone:** +91-9938080165\n📧 **Email:** imrinternational11@gmail.com\n🌐 **Website:** Available online\n\n**Social Media:**\n• Facebook | Twitter | LinkedIn | Instagram\n\n⏰ **Office Hours:** Mon–Sat, 9:00 AM – 5:30 PM`;
+  }
+
+  // Placement / jobs / career
+  if (/placement|job|career|salary|recruit|hire|campus/i.test(q)) {
+    return `💼 **Placement & Career Support:**\n\n✅ **85–90% placement rate** across programs\n✅ Dedicated **Centre for Training & Placement**\n✅ Campus recruitment drives with top companies\n✅ Resume building & interview preparation\n✅ Industry mentorship programs\n✅ 10,000+ strong alumni network for referrals\n\nAverage salary packages range from **₹4–12 LPA** depending on your program and specialization.\n\n📞 Career Helpdesk: +91-9938080165`;
+  }
+
+  // About IMR
+  if (/about|imr|college|institution|university|recognition|grade|naac|nba/i.test(q)) {
+    return `🏛️ **About IMR International:**\n\nIMR International (Institute for Management and Research) is a premier educational institution in Bhubaneswar, Odisha.\n\n**Tagline:** Smart • Digital • Innovation\n\n**Key Highlights:**\n🏆 A+ Grade Recognition\n📚 25+ Digital Programs\n👥 10,000+ Alumni Network\n🎯 SMART, Digital & Innovation-focused education\n\n**Focus Centers:**\n• Centre for Research\n• Centre for Training & Placement\n• Centre for Student Development\n• Centre for Women Empowerment\n• Centre for Consulting (NBA, NAAC)\n\n📍 07 District Centre, CS Pur, Bhubaneswar`;
+  }
+
+  // Greetings
+  if (/^(hi|hello|hey|good morning|good afternoon|good evening|namaste)[\s!.]*$/i.test(q)) {
+    return `Hello! 👋 Welcome to **IMR International**!\n\nI'm here to help you with information about:\n• 🎓 Our degree & certification programs\n• 📋 Admission process\n• 🏆 Scholarships & financial aid\n• 💼 Placements & career support\n• 📍 Contact & location\n\nWhat would you like to know?`;
+  }
+
+  // Thanks
+  if (/thank|thanks|great|awesome|helpful|perfect|good/i.test(q)) {
+    return `You're welcome! 😊 \n\nIs there anything else I can help you with? Feel free to ask about our programs, admissions, scholarships, or anything else about IMR International!\n\n📞 You can also reach us directly at **+91-9938080165**.`;
+  }
+
+  // Default fallback
+  return `I'm not sure about that specific topic, but I'd be happy to help! Here's what I can answer:\n\n• 🎓 **Programs** – BBA, BCA, BSc Data Science, Certifications\n• 📋 **Admissions** – How to apply, eligibility, process\n• 🏆 **Scholarships** – Merit, need-based, sports, women in tech\n• 💰 **Fees & Loans** – Fee structure, bank loan assistance\n• 💼 **Placements** – Career support, salary stats\n• 📍 **Contact** – Phone, email, address\n\nFor detailed queries, please contact us at:\n📞 **+91-9938080165**\n📧 **imrinternational11@gmail.com**`;
+}
 
 export function ChatBot() {
   const [open, setOpen] = useState(false);
@@ -40,62 +138,36 @@ export function ChatBot() {
     if (!text.trim() || loading) return;
 
     const userMsg: Message = { role: "user", content: text.trim() };
-    const newMessages = [...messages, userMsg];
-    setMessages(newMessages);
+    setMessages(prev => [...prev, userMsg]);
     setInput("");
     setLoading(true);
 
-    const assistantMsg: Message = { role: "assistant", content: "" };
-    setMessages([...newMessages, assistantMsg]);
+    // Simulate natural typing delay
+    const delay = 600 + Math.random() * 800;
+    await new Promise(resolve => setTimeout(resolve, delay));
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
-      });
+    const responseText = getLocalResponse(text);
 
-      if (!res.ok) throw new Error("Failed");
+    setMessages(prev => [...prev, { role: "assistant", content: responseText }]);
+    setLoading(false);
+  };
 
-      const reader = res.body!.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let fullContent = "";
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            try {
-              const data = JSON.parse(line.slice(6));
-              if (data.content) {
-                fullContent += data.content;
-                setMessages(prev => {
-                  const updated = [...prev];
-                  updated[updated.length - 1] = { role: "assistant", content: fullContent };
-                  return updated;
-                });
-              }
-            } catch {}
-          }
-        }
+  // Format markdown-like text to JSX
+  const formatMessage = (text: string) => {
+    return text.split("\n").map((line, i) => {
+      if (line.startsWith("**") && line.endsWith("**")) {
+        return <p key={i} className="font-bold text-foreground">{line.slice(2, -2)}</p>;
       }
-    } catch {
-      setMessages(prev => {
-        const updated = [...prev];
-        updated[updated.length - 1] = {
-          role: "assistant",
-          content: "I'm sorry, I'm having trouble connecting right now. Please try again or contact us at +91-9938080165."
-        };
-        return updated;
-      });
-    } finally {
-      setLoading(false);
-    }
+      // Bold inline
+      const parts = line.split(/\*\*(.*?)\*\*/g);
+      return (
+        <p key={i} className={line === "" ? "h-1" : ""}>
+          {parts.map((part, j) =>
+            j % 2 === 1 ? <strong key={j}>{part}</strong> : part
+          )}
+        </p>
+      );
+    });
   };
 
   return (
@@ -146,7 +218,7 @@ export function ChatBot() {
                 <p className="text-white font-bold text-sm">IMR Assistant</p>
                 <p className="text-white/70 text-xs flex items-center gap-1">
                   <span className="w-1.5 h-1.5 bg-green-400 rounded-full inline-block"></span>
-                  Online · Ready to help
+                  Online · Always available
                 </p>
               </div>
               <button onClick={() => setOpen(false)} className="ml-auto text-white/70 hover:text-white transition-colors">
@@ -161,21 +233,29 @@ export function ChatBot() {
                   <div className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center ${msg.role === "user" ? "bg-primary" : "bg-accent"}`}>
                     {msg.role === "user" ? <User className="w-4 h-4 text-white" /> : <Bot className="w-4 h-4 text-white" />}
                   </div>
-                  <div className={`max-w-[78%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${
+                  <div className={`max-w-[78%] px-3 py-2 rounded-2xl text-sm leading-relaxed space-y-0.5 ${
                     msg.role === "user"
                       ? "bg-primary text-white rounded-tr-sm"
                       : "bg-white text-foreground rounded-tl-sm shadow-sm border border-border/50"
                   }`}>
-                    {msg.content || (
-                      <span className="flex gap-1 items-center h-4">
-                        <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                        <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                        <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
-                      </span>
-                    )}
+                    {msg.role === "assistant" ? formatMessage(msg.content) : msg.content}
                   </div>
                 </div>
               ))}
+              {loading && (
+                <div className="flex gap-2">
+                  <div className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center bg-accent">
+                    <Bot className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="px-3 py-2 bg-white rounded-2xl rounded-tl-sm shadow-sm border border-border/50">
+                    <span className="flex gap-1 items-center h-4">
+                      <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+                      <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+                      <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                    </span>
+                  </div>
+                </div>
+              )}
               <div ref={bottomRef} />
             </div>
 

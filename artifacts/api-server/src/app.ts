@@ -16,7 +16,15 @@ const PgSession = connectPgSimple(session);
 
 const app: Express = express();
 
-app.use(cors({ origin: true, credentials: true }));
+// Dynamic CORS to allow the frontend to communicate with the API
+app.use(cors({ 
+  origin: (origin, callback) => {
+    // In production, you'd specify exactly one or more allowed domains
+    // For now, origin: true allows any origin (mirroring) with credentials
+    callback(null, true);
+  },
+  credentials: true 
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -31,8 +39,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
+      // In production (Vercel/Railway), we must use secure: true and sameSite: 'none'
+      // to allow cross-site cookies between the frontend and backend domains.
       secure: process.env["NODE_ENV"] === "production",
       httpOnly: true,
+      sameSite: process.env["NODE_ENV"] === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     },
   })

@@ -26,9 +26,18 @@ function isUrl(input: RequestInfo | URL): input is URL {
 }
 
 function resolveUrl(input: RequestInfo | URL): string {
-  if (typeof input === "string") return input;
-  if (isUrl(input)) return input.toString();
-  return input.url;
+  const url = typeof input === "string" ? input : isUrl(input) ? input.toString() : input.url;
+
+  // In production, we might need a base URL (e.g. https://api.example.com)
+  // We check for a global config or environment variable.
+  // @ts-ignore - VITE environment variable support
+  const baseUrl = (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_BASE_URL) || "";
+
+  if (baseUrl && url.startsWith("/")) {
+    return `${baseUrl.replace(/\/$/, "")}${url}`;
+  }
+
+  return url;
 }
 
 function mergeHeaders(...sources: Array<HeadersInit | undefined>): Headers {

@@ -37,13 +37,31 @@ yarn-error.log
 testem.log
 /typings
 
-# System Files
+# Environment variables
+.env
+.env.*
+!.env.example
+start.bat
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# Common exclusions
 .DS_Store
 Thumbs.db
+node_modules/
+.pnpm-debug.log*
 
-.cursor/rules/nx-rules.mdc
-.github/instructions/nx.instructions.md
-
-# Replit
+# Replit & local caches
 .cache/
 .local/
+.replit
+.replitignore
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
