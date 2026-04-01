@@ -5,6 +5,7 @@ import { Lock, User, Eye, EyeOff, BarChart2, Shield, AlertCircle } from "lucide-
 import { TopBar } from "@/components/TopBar";
 
 const BASE_URL = import.meta.env.BASE_URL?.replace(/\/$/, "") || "";
+const API_BASE = (import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "")) || BASE_URL;
 
 export default function AdminLogin() {
   const [, setLocation] = useLocation();
@@ -20,7 +21,7 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BASE_URL}/api/admin/login`, {
+      const res = await fetch(`${API_BASE}/api/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
