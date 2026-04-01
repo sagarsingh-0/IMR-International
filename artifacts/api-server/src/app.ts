@@ -24,6 +24,7 @@ try {
 const PgSession = connectPgSimple(session);
 
 const app: Express = express();
+app.set("trust proxy", 1);
 
 // Dynamic CORS to allow the frontend to communicate with the API
 app.use(cors({ 

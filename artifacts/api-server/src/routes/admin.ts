@@ -42,7 +42,9 @@ router.post("/login", (req: Request, res: Response) => {
   }
   if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
     req.session.isAdmin = true;
-    res.json({ success: true, message: "Admin login successful" });
+    req.session.save(() => {
+      res.json({ success: true, message: "Admin login successful" });
+    });
     return;
   }
   res.status(401).json({ error: "Invalid admin credentials" });
