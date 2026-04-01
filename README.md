@@ -1,6 +1,9 @@
 # IMR International - Digital Education Portal
 ## Project Topic: Consent-Based Anonymous User Behavior Monitoring System
 
+### 🔗 Live Demo: [https://imr-international-api-server.vercel.app/](https://imr-international-api-server.vercel.app/)
+### 🔌 Backend API: [https://imr-backend.onrender.com](https://imr-backend.onrender.com)
+
 This project is a high-performance web application designed for IMR International. It features a custom-built **Consent-Based Anonymous User Behavior Monitoring System**, developed as a major project contribution to ethical web development and privacy-preserving analytics.
 
 ## 🔭 Research Focus
