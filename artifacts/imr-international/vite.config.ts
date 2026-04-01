@@ -4,10 +4,9 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 const port = Number(process.env.PORT) || 5173;
-const basePath = process.env.BASE_PATH || "/";
 
 export default defineConfig({
-  base: basePath,
+  base: "/",
   plugins: [
     react(),
     tailwindcss(),
@@ -21,7 +20,7 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    outDir: "dist",
     emptyOutDir: true,
   },
   server: {
