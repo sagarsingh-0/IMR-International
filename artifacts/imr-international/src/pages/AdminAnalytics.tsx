@@ -14,6 +14,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
 const BASE_URL = import.meta.env.BASE_URL?.replace(/\/$/, "") || "";
+const API_BASE = (import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "")) || BASE_URL;
 
 type Period = "daily" | "weekly" | "monthly";
 
@@ -97,7 +98,7 @@ export default function AdminAnalytics() {
 
   // Guard: verify admin session on mount
   useEffect(() => {
-    fetch(`${BASE_URL}/api/admin/me`, { credentials: "include" })
+    fetch(`${API_BASE}/api/admin/me`, { credentials: "include" })
       .then(res => {
         if (!res.ok) setLocation("/admin/login");
         else setAuthChecked(true);
@@ -106,7 +107,7 @@ export default function AdminAnalytics() {
   }, []);
 
   const handleLogout = async () => {
-    await fetch(`${BASE_URL}/api/admin/logout`, { method: "POST", credentials: "include" });
+    const res = await fetch(`${API_BASE}/api/admin/logout`, { method: "POST", credentials: "include" });
     setLocation("/admin/login");
   };
 
@@ -114,9 +115,9 @@ export default function AdminAnalytics() {
     setLoading(true);
     try {
       const [periodRes, summaryRes, interestRes] = await Promise.all([
-        fetch(`${BASE_URL}/api/analytics/${period}`),
-        fetch(`${BASE_URL}/api/analytics/summary`),
-        fetch(`${BASE_URL}/api/analytics/interests`),
+        fetch(`${API_BASE}/api/analytics/${period}`),
+        fetch(`${API_BASE}/api/analytics/summary`),
+        fetch(`${API_BASE}/api/analytics/interests`),
       ]);
       if (periodRes.ok) setData(await periodRes.json());
       if (summaryRes.ok) setSummary(await summaryRes.json());

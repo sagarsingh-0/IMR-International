@@ -10,6 +10,7 @@ import { TopBar } from "@/components/TopBar";
 import { Navigation } from "@/components/Navigation";
 
 const BASE_URL = import.meta.env.BASE_URL?.replace(/\/$/, "") || "";
+const API_BASE = (import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "")) || BASE_URL;
 
 interface TableMeta {
   table: string;
@@ -63,7 +64,7 @@ export default function AdminDatabase() {
 
   // Auth guard
   useEffect(() => {
-    fetch(`${BASE_URL}/api/admin/me`, { credentials: "include" })
+    fetch(`${API_BASE}/api/admin/me`, { credentials: "include" })
       .then(r => { if (!r.ok) setLocation("/admin/login"); else setAuthChecked(true); })
       .catch(() => setLocation("/admin/login"));
   }, []);
@@ -72,7 +73,7 @@ export default function AdminDatabase() {
   useEffect(() => {
     if (!authChecked) return;
     setTablesLoading(true);
-    fetch(`${BASE_URL}/api/admin/db/tables`, { credentials: "include" })
+    fetch(`${API_BASE}/api/admin/db/tables`, { credentials: "include" })
       .then(r => r.json())
       .then((data: TableMeta[]) => {
         setTables(data);
@@ -87,7 +88,7 @@ export default function AdminDatabase() {
     try {
       const params = new URLSearchParams({ page: String(pg), limit: "20" });
       if (q) params.set("search", q);
-      const r = await fetch(`${BASE_URL}/api/admin/db/${table}?${params}`, { credentials: "include" });
+      const r = await fetch(`${API_BASE}/api/admin/db/${table}?${params}`, { credentials: "include" });
       if (r.ok) setTableData(await r.json());
     } finally {
       setLoading(false);
@@ -156,7 +157,7 @@ export default function AdminDatabase() {
                 <BarChart2 className="w-3.5 h-3.5" /> Analytics
               </button>
               <button onClick={async () => {
-                await fetch(`${BASE_URL}/api/admin/logout`, { method: "POST", credentials: "include" });
+                await fetch(`${API_BASE}/api/admin/logout`, { method: "POST", credentials: "include" });
                 setLocation("/admin/login");
               }} className="flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-rose-500 border border-white/15 text-white rounded-xl text-xs font-semibold transition-all">
                 Sign Out
