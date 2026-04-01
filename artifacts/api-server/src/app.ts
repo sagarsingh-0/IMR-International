@@ -9,8 +9,17 @@ import { existsSync } from "fs";
 import { pool } from "@workspace/db";
 import router from "./routes";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+let __filename = "";
+let __dirname = "";
+
+try {
+  // @ts-ignore - Fallback for bundled CJS
+  __filename = typeof fileURLToPath !== "undefined" && import.meta.url ? fileURLToPath(import.meta.url) : (typeof __filename !== "undefined" ? __filename : "");
+  // @ts-ignore - Fallback for bundled CJS
+  __dirname = typeof path !== "undefined" && __filename ? path.dirname(__filename) : (typeof __dirname !== "undefined" ? __dirname : ".");
+} catch (e) {
+  // Fallback for production bundle where import.meta might be empty
+}
 
 const PgSession = connectPgSimple(session);
 
